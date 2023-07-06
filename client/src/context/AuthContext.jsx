@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useCallback, useEffect, useState } from "react";
-import { baseUrl, postRequest } from "../utils/services";
+import { postRequest } from "../utils/services";
+import { loginRoute, registerRoute } from "../utils/APIRoutes";
 
 export const AuthContext = createContext();
 
@@ -41,7 +42,7 @@ export const AuthContextProvider = ({ children }) => {
     setIsRegisterLoading(true);
     setRegisterError(null);
 
-    const response = await postRequest(`${baseUrl}/users/register`, JSON.stringify(registerInfo));
+    const response = await postRequest(registerRoute, JSON.stringify(registerInfo));
 
     setIsRegisterLoading(false);
 
@@ -59,7 +60,7 @@ export const AuthContextProvider = ({ children }) => {
     setIsLoginLoading(true);
     setLoginError(null);
 
-    const response = await postRequest(`${baseUrl}/users/login`, JSON.stringify(loginInfo));
+    const response = await postRequest(loginRoute, JSON.stringify(loginInfo));
 
     setIsLoginLoading(false);
 

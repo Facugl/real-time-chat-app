@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { createContext, useCallback, useEffect, useState } from "react";
-import { baseUrl, getRequest, postRequest } from "../utils/services";
+import { getRequest, postRequest } from "../utils/services";
 import { io } from "socket.io-client";
+import { messagesRoute, chatsRoute, getUsersRoute, localhost } from "../utils/APIRoutes";
 
 export const ChatContext = createContext();
 
@@ -23,7 +24,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3000");
+    const newSocket = io(localhost);
     setSocket(newSocket);
 
     return () => {
@@ -82,7 +83,7 @@ export const ChatContextProvider = ({ children, user }) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await getRequest(`${baseUrl}/users`);
+      const response = await getRequest(getUsersRoute);
 
       if (response.error) {
         return console.log("Error fetching users", response);
@@ -112,7 +113,7 @@ export const ChatContextProvider = ({ children, user }) => {
 
       if (user?._id) {
         const userId = user?._id;
-        const response = await getRequest(`${baseUrl}/chats/${userId}`);
+        const response = await getRequest(`${chatsRoute}/${userId}`);
 
         if (response.error) {
           return setUserChatsError(response);
@@ -132,7 +133,7 @@ export const ChatContextProvider = ({ children, user }) => {
       setIsMessageLoading(true);
       setMessageError(null);
 
-      const response = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
+      const response = await getRequest(`${messagesRoute}/${currentChat?._id}`);
 
       setIsMessageLoading(false);
 
@@ -149,7 +150,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const sendTextMessage = useCallback(async (textMessage, sender, currentChatId, setTextMessage) => {
     if (!textMessage) return console.log("You must type something...");
 
-    const response = await postRequest(`${baseUrl}/messages`, JSON.stringify({
+    const response = await postRequest(messagesRoute, JSON.stringify({
       chatId: currentChatId,
       senderId: sender._id,
       text: textMessage,
@@ -169,7 +170,7 @@ export const ChatContextProvider = ({ children, user }) => {
   }, []);
 
   const createChat = useCallback(async (firstId, secondId) => {
-    const response = await postRequest(`${baseUrl}/chats`, JSON.stringify({
+    const response = await postRequest(chatsRoute, JSON.stringify({
       firstId,
       secondId
     })

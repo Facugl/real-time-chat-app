@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
+import { useFetchRecipientUser, useFetchLatestMessage } from "../../hooks";
 import avatar from "../../assets/avatar.svg";
 import { useContext } from "react";
 import { ChatContext } from "../../context/ChatContext";
 import { unreadNotificationsFunc } from "../../utils/unreadNotifications";
-import { useFetchLatestMessage } from "../../hooks/useFetchLatestMessage";
 import moment from "moment";
 
 const UserChats = ({ chat, user }) => {

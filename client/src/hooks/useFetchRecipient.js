@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { baseUrl, getRequest } from "../utils/services";
+import { getRequest } from "../utils/services";
+import { findUserRoute } from "../utils/APIRoutes";
 
 export const useFetchRecipientUser = (chat, user) => {
   const [recipientUser, setRecipientUser] = useState(null);
@@ -12,7 +13,7 @@ export const useFetchRecipientUser = (chat, user) => {
     const getUser = async () => {
       if (!recipientId) return null;
 
-      const response = await getRequest(`${baseUrl}/users/find/${recipientId}`);
+      const response = await getRequest(`${findUserRoute}/${recipientId}`);
 
       if (response.error) {
         return setError(response);

@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { TbMessageCircle2Filled } from "react-icons/tb";
-import { AuthContext } from "../../context/AuthContext";
-import { ChatContext } from "../../context/ChatContext";
+import { AuthContext, ChatContext } from "../../context/";
 import { unreadNotificationsFunc } from "../../utils/unreadNotifications";
 import moment from "moment";
 
