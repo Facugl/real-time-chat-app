@@ -3,7 +3,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { getRequest, postRequest } from "../utils/services";
 import { io } from "socket.io-client";
-import { messagesRoute, chatsRoute, getUsersRoute, localhost } from "../utils/APIRoutes";
+import { messagesRoute, chatsRoute, getUsersRoute, host } from "../utils/APIRoutes";
 
 export const ChatContext = createContext();
 
@@ -24,7 +24,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    const newSocket = io(localhost);
+    const newSocket = io(host);
     setSocket(newSocket);
 
     return () => {
