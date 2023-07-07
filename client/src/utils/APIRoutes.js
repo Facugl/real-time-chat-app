@@ -1,5 +1,5 @@
 export const localhost = "http://localhost:5000";
-export const host = "https://realtime-chat-w0at.onrender.com"; // "https://chit-chat-mern-app.onrender.com"
+export const host = "https://realtime-chat-api-nvy6.onrender.com"; // "https://chit-chat-mern-app.onrender.com"
 export const loginRoute = `${host}/api/users/login`;
 export const registerRoute = `${host}/api/users/register`;
 export const getUsersRoute = `${host}/api/users`;
