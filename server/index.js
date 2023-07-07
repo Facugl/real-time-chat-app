@@ -34,12 +34,10 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://realtime-chat-w0at.onrender.com",
     credentials: true,
   },
 });
-
-// const io = new Server({ cors: "http://localhost:5173" });
 
 let onlineUsers = [];
 
